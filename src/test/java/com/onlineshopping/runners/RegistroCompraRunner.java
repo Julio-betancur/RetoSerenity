@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features/RegistroCompra.feature",
         glue = "com.onlineshopping.stepdefinitions",
+        tags = "@Compra",
         snippets = SnippetType.CAMELCASE
 )
 public class RegistroCompraRunner {

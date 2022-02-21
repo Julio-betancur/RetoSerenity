@@ -1,8 +1,10 @@
 package com.onlineshopping.stepdefinitions;
 
+import com.onlineshopping.builders.Login;
 import com.onlineshopping.driver.SeleniumWebDriver;
 import com.onlineshopping.globalvar.GlobarVars;
 import com.onlineshopping.models.Usuario;
+import com.onlineshopping.questions.NombreLaptop;
 import com.onlineshopping.tasks.BuscarProducto;
 import com.onlineshopping.tasks.ComprarProducto;
 import com.onlineshopping.tasks.IniciarSesion;
@@ -11,10 +13,11 @@ import com.onlineshopping.userinterface.LaptopUI;
 import com.onlineshopping.userinterface.OrdenPagoUI;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.*;
+import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
-import org.hamcrest.Matchers;
+import org.hamcrest.*;
 import org.junit.Assert;
 
 import java.util.List;
@@ -49,7 +52,11 @@ public class RegistroCompraStepDefinitions {
 
     @When("^she logs in and buys a computer$")
     public void sheLogsInAndBuysAComputer(List<Usuario> listaUsuario) {
-        OnStage.theActorInTheSpotlight().attemptsTo(IniciarSesion.conLasCredenciales(listaUsuario.get(0).getUsuario(),listaUsuario.get(0).getClave()));
+        //OnStage.theActorInTheSpotlight().attemptsTo(IniciarSesion.conLasCredenciales(listaUsuario.get(0).getUsuario(),listaUsuario.get(0).getClave()));
+        OnStage.theActorInTheSpotlight().attemptsTo(Login.with()
+                .username(listaUsuario.get(0).getUsuario())
+                .andPassword(listaUsuario.get(0).getClave())
+                .rememberMe(true));
         Assert.assertThat(GlobarVars.randomModel, Matchers.is(listaUsuario.get(0).getUsuario()));
         OnStage.theActorInTheSpotlight().attemptsTo(BuscarProducto.on());
         Assert.assertEquals(GlobarVars.randomModel.toUpperCase(),LaptopUI.LBL_NOMBRE_LAPTOP.resolveFor(OnStage.theActorInTheSpotlight()).getText());
@@ -58,6 +65,7 @@ public class RegistroCompraStepDefinitions {
 
     @Then("^she can validate that the chosen computer corresponds to that of the payment order$")
     public void sheCanValidateThatTheChosenComputerCorrespondsToThatOfThePaymentOrder() {
-        Assert.assertEquals(GlobarVars.randomModel.toUpperCase(), OrdenPagoUI.LBL_NOMBRE_LAPTOP.resolveFor(OnStage.theActorInTheSpotlight()).getText());
+        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat("The displayed laptop name", NombreLaptop.value(),Matchers.equalTo(GlobarVars.randomModel.toUpperCase())));
+        //Assert.assertEquals(GlobarVars.randomModel.toUpperCase(), OrdenPagoUI.LBL_NOMBRE_LAPTOP.resolveFor(OnStage.theActorInTheSpotlight()).getText());
     }
 }

@@ -7,6 +7,9 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.JavaScriptClick;
+import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
+import net.serenitybdd.screenplay.questions.WebElementQuestion;
+import net.serenitybdd.screenplay.waits.Wait;
 
 public class IniciarSesion implements Task {
 
@@ -26,11 +29,9 @@ public class IniciarSesion implements Task {
                 Enter.theValue(usuario).into(HomeUI.TXT_USUARIO),
                 Enter.theValue(clave).into(HomeUI.TXT_PASS),
                 JavaScriptClick.on(HomeUI.BTN_INICIARSESION),
+                Wait.until(WebElementQuestion.the(HomeUI.LBL_USERNAME), WebElementStateMatchers.isVisible()).forNoLongerThan(10).seconds(),
                 GuardarLabel.on(HomeUI.LBL_USERNAME.resolveFor(actor))
-
         );
-
-
 
 
     }

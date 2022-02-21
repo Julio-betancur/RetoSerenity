@@ -12,6 +12,7 @@ public class HomeUI {
     public static final Target TXT_PASS = Target.the("Campo para ingresar la clave").locatedBy("//input[@name='password']");
     public static final Target BTN_INICIARSESION = Target.the("Boton para Iniciar sesion").locatedBy("//button[@id='sign_in_btnundefined']");
 
+    public static final Target CHECK_REMEMBER = Target.the("Check para recordar credenciales").locatedBy("//input[@name='remember_me']");
 
     public static final Target BTN_LAPTOS = Target.the("Boton para ir a la seccion de laptos").locatedBy("//div[@id='laptopsImg']");
 
