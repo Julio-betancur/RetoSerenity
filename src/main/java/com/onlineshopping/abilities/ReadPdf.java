@@ -6,7 +6,6 @@ import net.serenitybdd.screenplay.Ability;
 import net.serenitybdd.screenplay.Actor;
 
 import java.io.IOException;
-import java.util.UUID;
 
 public class ReadPdf  implements Ability {
     private String pdfText;

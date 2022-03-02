@@ -2,11 +2,9 @@ package com.onlineshopping.builders;
 
 import com.onlineshopping.interactions.GuardarLabel;
 import com.onlineshopping.userinterface.HomeUI;
-import net.serenitybdd.core.steps.Instrumented;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.JavaScriptClick;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;

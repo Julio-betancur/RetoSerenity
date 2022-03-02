@@ -1,5 +1,6 @@
 package com.onlineshopping.tasks;
 
+import com.onlineshopping.abilities.ReadPdf;
 import com.onlineshopping.interactions.GuardarLabel;
 import com.onlineshopping.userinterface.HomeUI;
 import net.serenitybdd.core.steps.Instrumented;
@@ -10,6 +11,8 @@ import net.serenitybdd.screenplay.actions.JavaScriptClick;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.waits.Wait;
+
+import java.io.IOException;
 
 public class IniciarSesion implements Task {
 
@@ -31,6 +34,7 @@ public class IniciarSesion implements Task {
                 JavaScriptClick.on(HomeUI.BTN_INICIARSESION),
                 Wait.until(WebElementQuestion.the(HomeUI.LBL_USERNAME), WebElementStateMatchers.isVisible()).forNoLongerThan(10).seconds(),
                 GuardarLabel.on(HomeUI.LBL_USERNAME.resolveFor(actor))
+
         );
 
 
